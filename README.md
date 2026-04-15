@@ -107,11 +107,31 @@ Different risk thresholds for different actions:
 
 ## OnchainOS Integration
 
-Depends on OnchainOS Skills for address targets:
+### Core Skills Used
 
-- `okx-security` - Token risk, honeypot detection, phishing scan
-- `okx-dex-token` - Token info, liquidity, holder analysis
-- `okx-onchain-gateway` - Transaction simulation, gas estimation
+| Skill | Commands | Purpose |
+|-------|----------|---------|
+| `okx-security` | token-scan, tx-scan, dapp-scan, sig-scan, approvals | Token risk, honeypot detection, phishing scan |
+| `okx-dex-token` | token info, liquidity, holders | Token metadata, market data, holder analysis |
+| `okx-onchain-gateway` | simulate, broadcast | Transaction simulation, gas estimation |
+
+### OKX Security Wrapper
+
+Our project includes a custom wrapper (`shared/okx-security-wrapper.mjs`) that:
+
+- ✅ Wraps all 5 okx-security commands
+- ✅ Converts OKX findings to XLayer Trust Gate format
+- ✅ Provides unified interface for token/tx/dapp/sig/approval checks
+- ✅ Enables action-specific risk judgment
+
+**Supported Operations:**
+- `tokenScan(address, chain)` - Check token security
+- `txScan(from, to, value, data, chain)` - Pre-execution transaction check
+- `dappScan(url)` - Phishing detection
+- `sigScan(from, message, chain, type)` - Signature safety
+- `getApprovals(address, chain)` - Query ERC20/Permit2 approvals
+
+**Note**: OnchainOS skills focus on **runtime transaction/token risks**, not static source code analysis. Our EVM specialists complement this with static code analysis.
 
 ## Project Structure
 
@@ -119,51 +139,27 @@ Depends on OnchainOS Skills for address targets:
 xlayer-trust-agent/
 └── skills/
     └── xlayer-trust-review/
-        ├── SKILL.md                   # Skill definition
+        ├── SKILL.md                      # Skill definition
         ├── scripts/
-        │   └── review-contract.mjs     # Main orchestrator
-        ├── evm-specialists/            # 6 EVM analysis modules
+        │   └── review-contract.mjs       # Main orchestrator
+        ├── evm-specialists/              # 6 EVM analysis modules
         │   ├── access-control/
         │   ├── upgradeability/
         │   ├── proxy-risk/
         │   ├── ownership-powers/
         │   ├── reentrancy/
         │   └── token-accounting/
-        └── shared/                     # Shared utilities
-            ├── onchainos-wrapper.mjs
+        └── shared/                       # Shared utilities
+            ├── onchainos-wrapper.mjs     # OnchainOS CLI wrapper
+            ├── okx-security-wrapper.mjs  # OKX Security wrapper
             └── xlayer-risk-brief.schema.json
 ```
 
 ## Agentic Wallet
 
-This project uses OnchainOS Agentic Wallet for chain identity:
-
-**Create your Agentic Wallet:**
-
-```bash
-# Install OnchainOS CLI
-npx skills add okx/onchainos-skills
-
-# Login with email (recommended)
-onchainos wallet login your@email.com --locale en-US
-# Enter OTP when prompted
-onchainos wallet verify 123456
-
-# Or login with API Key
-export OKX_API_KEY=your-key
-export OKX_SECRET_KEY=your-secret
-export OKX_PASSPHRASE=your-passphrase
-onchainos wallet login
-
-# View your wallet addresses
-onchainos wallet addresses
-```
-
-**Agentic Wallet Features:**
-- 🔐 TEE signing - private keys never leave secure enclave
-- 🌐 Multi-chain support (XLayer, Ethereum, Solana, BSC, Base)
-- 🤖 Designed for AI Agent automation
-- 🛡️ MEV protection for high-value transactions
+**Project Identity (Skills Arena Submission):**
+- **EVM:** `0x32eccee2d292112781c31a4d69384f558b724269` (XLayer, Ethereum, Polygon + 18 EVM chains)
+- **Solana:** `Fz4YdiD8VvKcFg2F5SApgppYE84w4U2RHd7CqsdsUa1j`
 
 **Hackathon Submission - Skills Arena**
 
