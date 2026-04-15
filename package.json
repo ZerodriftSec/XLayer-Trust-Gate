@@ -1,0 +1,37 @@
+{
+  "name": "xlayer-trust-agent",
+  "version": "0.1.0",
+  "description": "XLayer Trust Agent - agent-native security judgment layer for XLayer builders and integration agents",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "review-contract": "node skills/xlayer-trust-review/scripts/review-contract.mjs",
+    "check-integration": "node skills/xlayer-integration-check/scripts/check-integration.mjs",
+    "check-deployment": "node skills/xlayer-deployment-check/scripts/check-deployment.mjs",
+    "check-capital-flow": "node skills/xlayer-capital-check/scripts/check-capital-flow.mjs",
+    "analyze-access-control": "node skills/xlayer-trust-review/evm-specialists/access-control/scripts/analyze.mjs",
+    "analyze-upgradeability": "node skills/xlayer-trust-review/evm-specialists/upgradeability/scripts/analyze.mjs",
+    "analyze-proxy-risk": "node skills/xlayer-trust-review/evm-specialists/proxy-risk/scripts/analyze.mjs",
+    "analyze-ownership-powers": "node skills/xlayer-trust-review/evm-specialists/ownership-powers/scripts/analyze.mjs",
+    "analyze-reentrancy": "node skills/xlayer-trust-review/evm-specialists/reentrancy/scripts/analyze.mjs",
+    "analyze-token-accounting": "node skills/xlayer-trust-review/evm-specialists/token-accounting/scripts/analyze.mjs"
+  },
+  "keywords": [
+    "xlayer",
+    "security",
+    "audit",
+    "evm",
+    "trust-gate",
+    "agent-native",
+    "okx",
+    "onchainos"
+  ],
+  "author": "XLayer Trust Agent Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

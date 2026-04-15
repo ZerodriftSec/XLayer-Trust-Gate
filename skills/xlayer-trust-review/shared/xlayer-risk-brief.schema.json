@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xlayer-trust-agent.local/schemas/xlayer-risk-brief.schema.json",
+  "title": "XLayer Trust Agent Risk Brief",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "target",
+    "action",
+    "recommendation",
+    "risk_score",
+    "ship_blocker",
+    "findings",
+    "sources"
+  ],
+  "properties": {
+    "target": {
+      "type": "string",
+      "description": "Contract address or local path being evaluated"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["ship", "integrate", "allocate"],
+      "description": "Requested action type for risk evaluation"
+    },
+    "recommendation": {
+      "type": "string",
+      "enum": ["allow", "warn", "deny", "unsupported"],
+      "description": "Final trust recommendation"
+    },
+    "risk_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Overall risk score (0=safe, 100=critical)"
+    },
+    "ship_blocker": {
+      "type": "boolean",
+      "description": "Whether this finding should block deployment"
+    },
+    "why_this_verdict": {
+      "type": ["string", "null"],
+      "description": "Human-readable explanation of the verdict"
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "source",
+          "severity",
+          "confidence",
+          "evidence",
+          "trust_consequence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique finding identifier"
+          },
+          "title": {
+            "type": "string",
+            "description": "Finding title"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "okx-security",
+              "okx-dex-token",
+              "okx-onchain-gateway",
+              "okx-agentic-wallet",
+              "evm-access-control",
+              "evm-proxy-risk",
+              "evm-upgradeability"
+            ],
+            "description": "Source of this finding"
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low"]
+          },
+          "confidence": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "evidence": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "File paths or line numbers as evidence"
+          },
+          "trust_consequence": {
+            "type": "string",
+            "description": "What happens if this is exploited"
+          },
+          "exploit_path": {
+            "type": ["string", "null"],
+            "description": "How an attacker would exploit this"
+          },
+          "why_it_matters": {
+            "type": ["string", "null"],
+            "description": "Impact analysis"
+          },
+          "function_or_handler": {
+            "type": ["string", "null"],
+            "description": "Affected function or handler"
+          },
+          "primary_account_or_authority": {
+            "type": ["string", "null"],
+            "description": "Primary account or authority involved"
+          },
+          "remediation": {
+            "type": ["string", "null"],
+            "description": "How to fix this issue"
+          },
+          "ship_blocker": {
+            "type": "boolean",
+            "description": "Whether this specific finding blocks deployment"
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of all data sources used"
+    },
+    "onchainos_results": {
+      "type": "object",
+      "description": "Raw results from OnchainOS skills",
+      "additionalProperties": true
+    },
+    "evm_analysis_results": {
+      "type": "object",
+      "description": "Raw results from EVM static analysis",
+      "additionalProperties": true
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "type": "string"
+        },
+        "chain": {
+          "type": "string",
+          "enum": ["xlayer", "ethereum", "bsc", "polygon", "arbitrum", "base"]
+        },
+        "framework": {
+          "type": "string",
+          "enum": ["solidity", "vyper", "unknown"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "xlayer-trust-agent",
+  "version": "0.1.0",
+  "skills": [
+    "./skills/"
+  ],
+  "keywords": [
+    "xlayer",
+    "security",
+    "audit",
+    "evm",
+    "trust-gate",
+    "smart-contract",
+    "defi",
+    "okx",
+    "onchainos",
+    "agent-native"
+  ]
+}
