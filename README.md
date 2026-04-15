@@ -44,9 +44,18 @@ Get API keys from: https://web3.okx.com/onchain-os/dev-portal
 **Recommended**
 
 ```
-npx skills add okx/onchainos-skills
+npx skills add ZerodriftSec/XLayer-Trust-Gate
 ```
 
+
+## Usage
+
+
+```
+claude
+
+/xlayer-trust-review <path-to-project>
+```
 
 ## Skill Workflows
 
