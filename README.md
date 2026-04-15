@@ -41,11 +41,12 @@ Get API keys from: https://web3.okx.com/onchain-os/dev-portal
 
 ## Installation
 
-```bash
-git clone https://github.com/ZerodriftSec/XLayer-Trust-Gate.git
-cd XLayer-Trust-Gate
-npm install
+**Recommended**
+
 ```
+npx skills add okx/onchainos-skills
+```
+
 
 ## Skill Workflows
 
@@ -56,22 +57,6 @@ npm install
 **Pre-Allocation**: `xlayer-trust-review` (address + wallet) → allocate verdict → route capital or blacklist
 
 **GitHub Contract Audit**: `xlayer-trust-review` (GitHub file URL) → full analysis + report
-
-## Usage
-
-```bash
-# Review deployed contract for integration
-npm run review-contract -- --target 0x... --action integrate
-
-# Review local code before deployment
-npm run review-contract -- --target ./contracts/ --action ship
-
-# Review before allocating capital
-npm run review-contract -- --target 0x... --action allocate --wallet 0x...
-
-# Review GitHub contract
-npm run review-contract -- --target "https://github.com/user/repo/blob/main/Contract.sol" --action ship
-```
 
 ## Output
 
