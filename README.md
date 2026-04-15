@@ -134,6 +134,58 @@ xlayer-trust-agent/
             └── xlayer-risk-brief.schema.json
 ```
 
+## Agentic Wallet
+
+This project uses OnchainOS Agentic Wallet for chain identity:
+
+**Create your Agentic Wallet:**
+
+```bash
+# Install OnchainOS CLI
+npx skills add okx/onchainos-skills
+
+# Login with email (recommended)
+onchainos wallet login your@email.com --locale en-US
+# Enter OTP when prompted
+onchainos wallet verify 123456
+
+# Or login with API Key
+export OKX_API_KEY=your-key
+export OKX_SECRET_KEY=your-secret
+export OKX_PASSPHRASE=your-passphrase
+onchainos wallet login
+
+# View your wallet addresses
+onchainos wallet addresses
+```
+
+**Agentic Wallet Features:**
+- 🔐 TEE signing - private keys never leave secure enclave
+- 🌐 Multi-chain support (XLayer, Ethereum, Solana, BSC, Base)
+- 🤖 Designed for AI Agent automation
+- 🛡️ MEV protection for high-value transactions
+
+**Hackathon Submission - Skills Arena**
+
+This project participates in OKX BuildX Hackathon - Skills Arena:
+
+| Requirement | Status |
+|-------------|--------|
+| Agentic Wallet created | ✅ See above |
+| OnchainOS Skill integration | ✅ `okx-security`, `okx-dex-token`, `okx-onchain-gateway` |
+| Public GitHub repo | ✅ https://github.com/ZerodriftSec/XLayer-Trust-Gate |
+| README complete | ✅ Project intro, architecture, OnchainOS usage, XLayer positioning |
+
+**XLayer Ecosystem Positioning:**
+
+XLayer Trust Gate serves as the **security judgment layer** for XLayer agents:
+- Pre-deployment gate for XLayer contract deployments
+- Pre-integration check for XLayer protocol dependencies
+- Pre-allocation filter for capital routing to XLayer DeFi
+- Reduces agent risk exposure in XLayer ecosystem
+
+**Team:** XLayer Trust Agent Team
+
 ## License
 
 MIT
